@@ -20,7 +20,7 @@ public class ButtonClick : MonoBehaviour
     void Start()
     {
         newGame.onClick.AddListener(BeginNewGame);
-        continueGame.onClick.AddListener(delegate { ContinueGame("defaultSave"); });
+        continueGame.onClick.AddListener(delegate { ContinueGame("save1"); });
         loadGame.onClick.AddListener(LoadGame);
         cancelButton.onClick.AddListener(cancel);
         saveButton1.onClick.AddListener(delegate { ContinueGame("save1"); });
@@ -34,6 +34,7 @@ public class ButtonClick : MonoBehaviour
     void BeginNewGame()
     {
         SceneManager.LoadScene("Game");
+        
         GamManager.Instance.LoadGame(String.Empty);
     }
 

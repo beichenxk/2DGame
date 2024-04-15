@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public float speed_y;
     private void Start()
     {
-        animator=GetComponent<Animator>();
+        animator=transform.parent.GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -34,14 +34,15 @@ public class PlayerController : MonoBehaviour
         switch (state)
         {
             case PlayerState.Idle:
-                break;
-            case PlayerState.Jumping:
-                if (Input.GetKeyDown("space"))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     speed_y = 5;
                     speed_x = 0;
+                    switchState(PlayerState.Jumping); 
                 }
-                animator.SetBool("isJumping", true);//动画切换
+               
+                break;
+            case PlayerState.Jumping:
                 break;
             case PlayerState.Falling:
                 break;
@@ -57,7 +58,30 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // 对刚体施力
+        speed_y-=9.8f*Time.deltaTime;
         rb.velocity = new Vector2(speed_x, speed_y);
-        
+    }
+
+    public void switchState(PlayerState state)
+    {
+        this.state = state;
+
+        switch (state)
+        {
+            case PlayerState.Idle:
+                animator.SetBool("jump", false);
+                break;
+            case PlayerState.Jumping:
+                animator.SetBool("jump", true);
+                break;
+            case PlayerState.Falling:
+                break;
+            case PlayerState.Attacking:
+                break;
+            case PlayerState.Dead:
+                break;
+            default:
+                break;  
+        }
     }
 }
