@@ -9,6 +9,7 @@ public class PlayerStateManager:MonoBehaviour
     public PlayerIdleState idleState;
     public PlayerMoveState moveState;
     public PlayerJumpState jumpState;
+    public PlayerFallState fallState;
 
 
 
@@ -19,6 +20,7 @@ public class PlayerStateManager:MonoBehaviour
         idleState = new PlayerIdleState(stateMachine,"Idle");
         moveState = new PlayerMoveState(stateMachine,"Move");
         jumpState = new PlayerJumpState(stateMachine,"Jump");
+        fallState = new PlayerFallState(stateMachine,"Fall");
         stateMachine.Initialize(idleState);
     }
 

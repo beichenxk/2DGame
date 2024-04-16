@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerMoveState : State
 {
+    float speed_x;
     public PlayerMoveState(StateMachine stateMachine, string aniBoolName) : base(stateMachine, aniBoolName)
     {
     }
@@ -14,15 +15,16 @@ public class PlayerMoveState : State
         PlayerController.instance.ChangeAnimation("Move");
     }
 
-    public void Update()
+    public override void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             stateMachine.ChangeState(PlayerStateManager.instance.jumpState);
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            PlayerController.instance.rb.velocity = new Vector2(-PlayerController.instance.Speed, PlayerController.instance.rb.velocity.y);
+            speed_x = -PlayerController.instance.Speed;
+            
             if (PlayerController.instance.moveRight == true)
             {
                 PlayerController.instance.moveRight = false;
@@ -32,7 +34,7 @@ public class PlayerMoveState : State
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            PlayerController.instance.rb.velocity = new Vector2(PlayerController.instance.Speed, PlayerController.instance.rb.velocity.y);
+            speed_x = PlayerController.instance.Speed;
             if (PlayerController.instance.moveRight == false)
             {
                 PlayerController.instance.moveRight = true;
@@ -47,11 +49,12 @@ public class PlayerMoveState : State
             stateMachine.ChangeState(PlayerStateManager.instance.idleState);
         }
     }
-    // public override void FixedUpdate()
-    // {
+    public override void FixedUpdate()
+    {
 
+        PlayerController.instance.rb.velocity = new Vector2(speed_x, PlayerController.instance.rb.velocity.y);
 
-    // }
+    }
     public override void Exit()
     {
         Debug.Log("end move");

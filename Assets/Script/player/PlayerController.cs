@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public Animator animator;
     public  Rigidbody2D rb;
+    public Detection detection;
 
     
 
@@ -42,14 +43,19 @@ public class PlayerController : MonoBehaviour
     {
         animator=GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        detection = GetComponentInChildren<Detection>();
        
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         PlayerStateManager.instance.stateMachine.currentState.Update();//检测是否按键切换了状态
-        // PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();//检测是否按键切换了状态
+        detection.GroundCheck();
+    }
+    void FixedUpdate()
+    {
+        PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();//检测是否按键切换了状态
     }
 
 
