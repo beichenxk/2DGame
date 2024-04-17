@@ -30,10 +30,9 @@ public class PlayerController : MonoBehaviour
     [Header("Move")]
     public float Speed;
     [HideInInspector]public bool moveRight;//用于判断是否向右,避免一直判定翻转函数FlipSprite
-    // public float speed_x;
-    // public float speed_y;
 
     public float JumpForce;
+    public float ClimbSpeed;
     void Awake()
     {
         instance=this;
@@ -50,6 +49,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerStateManager.instance.stateMachine.currentState.Update();//检测是否按键切换了状态
+        PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();
         detection.GroundCheck();
         detection.EdgeCheck();
     }

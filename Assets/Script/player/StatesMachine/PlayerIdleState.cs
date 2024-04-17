@@ -33,6 +33,10 @@ public class PlayerIdleState : State
         }
 
     }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
     public override void Exit()
     {
         Debug.Log("end idle");
