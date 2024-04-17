@@ -12,11 +12,15 @@ public class PlayerMoveState : State
     public override void Enter()
     {
         Debug.Log("enter move");
-        PlayerController.instance.ChangeAnimation("Move");
+        PlayerController.instance.ChangeAnimation(name);
     }
 
     public override void Update()
     {
+        if(!detection.instance.isAtGround)
+        {
+            stateMachine.ChangeState(PlayerStateManager.instance.fallState);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             stateMachine.ChangeState(PlayerStateManager.instance.jumpState);

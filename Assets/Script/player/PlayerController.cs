@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public Animator animator;
     public  Rigidbody2D rb;
-    public Detection detection;
+    public detection detection;
 
     
 
@@ -43,8 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         animator=GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        detection = GetComponentInChildren<Detection>();
-       
+        detection = GetComponentInChildren<detection>();
     }
 
     // Update is called once per frame
@@ -52,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerStateManager.instance.stateMachine.currentState.Update();//检测是否按键切换了状态
         detection.GroundCheck();
+        detection.EdgeCheck();
     }
     void FixedUpdate()
     {

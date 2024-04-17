@@ -1,4 +1,6 @@
-public class State
+using UnityEngine;
+
+public class State:MonoBehaviour
 {
     protected StateMachine stateMachine;
     public string name;

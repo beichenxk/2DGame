@@ -14,7 +14,7 @@ public class PlayerIdleState : State
     public override void Enter()
     {
         Debug.Log("enter idle");
-        PlayerController.instance.ChangeAnimation("Idle");
+        PlayerController.instance.ChangeAnimation(name);
     }
     public override void Update()
     {
