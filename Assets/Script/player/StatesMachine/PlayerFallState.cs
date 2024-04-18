@@ -18,20 +18,22 @@ public class PlayerFallState : State
     {
         Debug.Log("enter Fall");
         PlayerController.instance.ChangeAnimation(name);
+        detection.instance.EdgeCheckPoint.SetActive(true);
     }
     public override void Update()
     {
+        EdgeCheck();
         if (detection.instance.isAtGround)
         {
             // Debug.Log(1);
             stateMachine.ChangeState(PlayerStateManager.instance.idleState);
         }
-        if(!detection.instance.isAtEdge)
+        if(!detection.instance.isAtWall)
         {
             // Debug.Log(2);
             detection.instance.canGrab=true;
         }
-        if (detection.instance.isAtEdge&&detection.instance.canGrab)
+        if (detection.instance.isAtWall&&detection.instance.isAtEdge&&detection.instance.canGrab)
         {
             // Debug.Log(3);
             detection.instance.canGrab=false;
@@ -39,7 +41,7 @@ public class PlayerFallState : State
         }
         if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log("fall a");
+            // Debug.Log("fall a");
             speed_x = -PlayerController.instance.Speed;
 
             if (PlayerController.instance.moveRight == true)
@@ -51,7 +53,7 @@ public class PlayerFallState : State
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("fall d");
+            // Debug.Log("fall d");
             speed_x = PlayerController.instance.Speed;
             if (PlayerController.instance.moveRight == false)
             {
@@ -73,6 +75,12 @@ public class PlayerFallState : State
     public override void Exit()
     {
         Debug.Log("end Fall");
+        detection.instance.EdgeCheckPoint.SetActive(false);
+    }
+
+    public void EdgeCheck()
+    {
+        detection.instance.isAtEdge = !Physics2D.Raycast(detection.instance.EdgeCheckPoint.transform.position,Vector2.down,detection.instance.distanceToEdge);
     }
 
 }

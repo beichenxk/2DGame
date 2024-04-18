@@ -48,10 +48,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        detection.checkAll();
         PlayerStateManager.instance.stateMachine.currentState.Update();//检测是否按键切换了状态
         PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();
-        detection.GroundCheck();
-        detection.EdgeCheck();
+        
     }
     void FixedUpdate()
     {
