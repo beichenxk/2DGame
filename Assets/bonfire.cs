@@ -1,0 +1,96 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using Fungus;
+using System;
+using Unity.Mathematics;
+
+public class bonfire : MonoBehaviour
+{
+    public string Name;
+    public string BlockName;
+    bool inCampFire;
+    // public GameObject HintButton;
+    Flowchart flowchart;
+    GameObject EngineerPrefab;
+    public GameObject EngineerSpawn;
+    void Start()
+    {
+        // HintButton.SetActive(false);
+        flowchart = FindObjectOfType<Flowchart>().GetComponent<Flowchart>();
+    }
+    void Update()
+    {
+        if (inCampFire)
+        {
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+
+
+                if (!bonfireManager.instance.unlockedbonfires.Find(obj => obj.Name == this.Name))
+                {
+                    Debug.Log("已点燃篝火" + this.Name);
+                    bonfireManager.instance.UnlockBonfire(this);
+                    setFungusBoolVariable(this.Name);
+                    GetComponent<SpriteRenderer>().color = Color.red;
+                    bonfireManager.instance.spawnPoint = transform.position;
+
+                }
+                else
+                {
+                    // Debug.Log("你已经点燃篝火了");
+
+                    if (flowchart.HasBlock(BlockName))
+                    {
+                        flowchart.ExecuteBlock(BlockName);
+                    }
+                }
+
+                // foreach (bonfire camp in bonfireManager.instance.unlockedcampfires)
+                // {
+                //     if (camp.Name == this.Name)
+                //     {
+                //         Debug.Log("这个是营火" + this.Name);
+                //     }
+                // }
+            }
+        }
+
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            inCampFire = true;
+            Debug.Log("进入篝火");
+            EngineerPrefab = Instantiate(bonfireManager.instance.EngineerPrefab, EngineerSpawn.transform.position, quaternion.identity);
+            // HintButton.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inCampFire = false;
+            Debug.Log("离开篝火");
+            Destroy(EngineerPrefab);
+            if (flowchart.HasBlock(BlockName))
+            {
+                flowchart.StopAllBlocks();
+            }
+        }
+    }
+
+    private void setFungusBoolVariable(String name)
+    {
+        if (name == "1")
+            flowchart.SetBooleanVariable("trans1", true);
+        else if (name == "2")
+            flowchart.SetBooleanVariable("trans2", true);
+    }
+
+}
