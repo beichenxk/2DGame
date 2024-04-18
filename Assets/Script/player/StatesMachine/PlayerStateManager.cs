@@ -12,6 +12,8 @@ public class PlayerStateManager:MonoBehaviour
     public PlayerFallState fallState;
     public PlayerHangState hangState;
     public PlayerClimbState climbState;
+    public PlayerCureState cureState;
+    public PlayerRollState rollState;
 
 
 
@@ -25,6 +27,8 @@ public class PlayerStateManager:MonoBehaviour
         fallState = new PlayerFallState(stateMachine,"Fall");
         hangState = new PlayerHangState(stateMachine,"Idle");//应该改成悬挂动画
         climbState = new PlayerClimbState(stateMachine,"Idle");//应该改成攀爬动画
+        cureState = new PlayerCureState(stateMachine,"Cure");
+        rollState = new PlayerRollState(stateMachine,"Roll");
         stateMachine.Initialize(idleState);
     }
 

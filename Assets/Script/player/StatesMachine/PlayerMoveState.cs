@@ -17,18 +17,23 @@ public class PlayerMoveState : State
 
     public override void Update()
     {
-        if(!detection.instance.isAtGround)
+        if (!detection.instance.isAtGround)
         {
             stateMachine.ChangeState(PlayerStateManager.instance.fallState);
         }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             stateMachine.ChangeState(PlayerStateManager.instance.jumpState);
         }
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            stateMachine.ChangeState(PlayerStateManager.instance.rollState);
+        }
         else if (Input.GetKey(KeyCode.A))
         {
             speed_x = -PlayerController.instance.Speed;
-            
+
             if (PlayerController.instance.moveRight == true)
             {
                 PlayerController.instance.moveRight = false;
@@ -45,6 +50,7 @@ public class PlayerMoveState : State
                 PlayerController.instance.onFlipSprite();
             }
         }
+
 
         //什么都不输入时,转为静止状态
         else

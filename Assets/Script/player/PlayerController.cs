@@ -4,16 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-// public enum PlayerState
-// {
-//     Idle,
-//     Jumping,
-//     Falling,
-//     Attacking,
-//     Dead
-// }
-
-
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,8 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         detection.checkAll();
         PlayerStateManager.instance.stateMachine.currentState.Update();//检测是否按键切换了状态
-        PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();
-        
+        PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();      
     }
     void FixedUpdate()
     {

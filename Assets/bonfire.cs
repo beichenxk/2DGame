@@ -27,16 +27,18 @@ public class bonfire : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-
+                PlayerData.instance.red=2;
+                PlayerData.instance.blue=1;
 
                 if (!bonfireManager.instance.unlockedbonfires.Find(obj => obj.Name == this.Name))
                 {
                     Debug.Log("已点燃篝火" + this.Name);
                     bonfireManager.instance.UnlockBonfire(this);
+                    bonfireManager.instance.spawnPoint = transform.position;
                     setFungusBoolVariable(this.Name);
                     GetComponent<SpriteRenderer>().color = Color.red;
-                    bonfireManager.instance.spawnPoint = transform.position;
-
+                    PlayerData.instance.red=2;
+                    PlayerData.instance.blue=1;
                 }
                 else
                 {

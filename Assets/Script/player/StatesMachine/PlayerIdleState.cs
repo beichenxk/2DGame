@@ -19,7 +19,7 @@ public class PlayerIdleState : State
     public override void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        {   
+        {
             stateMachine.ChangeState(PlayerStateManager.instance.jumpState);
         }
         else if (Input.GetKey(KeyCode.A))
@@ -29,8 +29,15 @@ public class PlayerIdleState : State
         else if (Input.GetKey(KeyCode.D))
         {
             stateMachine.ChangeState(PlayerStateManager.instance.moveState);
-
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (PlayerData.instance.red > 0)
+            {
+                PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.cureState);
+            }
+        }
+
 
     }
     public override void FixedUpdate()

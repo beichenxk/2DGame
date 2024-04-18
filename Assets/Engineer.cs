@@ -10,6 +10,8 @@ public class Engineer : MonoBehaviour
     public bool canSpeak = false;
     public string BlockName;
 
+    public GameObject UpdateUI;
+
 
     void OnValidate()
     {
@@ -38,6 +40,33 @@ public class Engineer : MonoBehaviour
     {
         Debug.Log("玩家退出");
         canSpeak = false;
+    }
+
+    public void openUpdateUI()
+    {
+        UpdateUI.SetActive(true);
+    }
+    public void closeUpdateUI()
+    {
+        UpdateUI.SetActive(false);
+    }
+
+    public void addHp()
+    {
+        PlayerData.instance._hplevel+=1;
+        Debug.Log(PlayerData.instance.maxHp);
+    }
+    public void addMp()
+    {
+        PlayerData.instance._mplevel+=1;
+    }
+    public void addAtk()
+    {
+        PlayerData.instance._atklevel+=1;
+    }
+    public void addShot()
+    {
+        PlayerData.instance._shotlevel+=1;
     }
     
 }
