@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class State:MonoBehaviour
+public class State
 {
     protected StateMachine stateMachine;
     public string name;
