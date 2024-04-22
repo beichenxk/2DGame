@@ -11,6 +11,7 @@ public class PlayerRollState : State
     {
         Debug.Log("enter Roll");
         PlayerController.instance.ChangeAnimation(name);
+
     }
     public override void Update()
     {
@@ -18,12 +19,21 @@ public class PlayerRollState : State
 
     public override void FixedUpdate()
     {
+        if (PlayerController.instance.transform.localScale.x == 1)
+        {
+            PlayerController.instance.rb.velocity = new Vector2(-5, PlayerController.instance.rb.velocity.y);
+        }
+        else
+        {
+        PlayerController.instance.rb.velocity = new Vector2(5, PlayerController.instance.rb.velocity.y);
+
+        }
     }
     public override void Exit()
     {
         Debug.Log("end Roll");
-        PlayerController.instance.rb.velocity=new Vector2(0,PlayerController.instance.rb.velocity.y);
+        PlayerController.instance.rb.velocity = new Vector2(0, PlayerController.instance.rb.velocity.y);
     }
 
-   
+
 }
