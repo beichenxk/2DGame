@@ -1,6 +1,7 @@
 using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
+using Fungus;
 using UnityEngine;
 
 
@@ -15,10 +16,15 @@ public class PlayerIdleState : State
     {
         Debug.Log("enter idle");
         PlayerController.instance.ChangeAnimation(name);
+        
     }
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            stateMachine.ChangeState(PlayerStateManager.instance.attackState);
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             stateMachine.ChangeState(PlayerStateManager.instance.jumpState);
         }

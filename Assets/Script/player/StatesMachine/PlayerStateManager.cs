@@ -14,6 +14,7 @@ public class PlayerStateManager:MonoBehaviour
     public PlayerClimbState climbState;
     public PlayerCureState cureState;
     public PlayerRollState rollState;
+    public PlayerAttackState attackState;
 
 
 
@@ -25,10 +26,11 @@ public class PlayerStateManager:MonoBehaviour
         moveState = new PlayerMoveState(stateMachine,"Move");
         jumpState = new PlayerJumpState(stateMachine,"Jump");
         fallState = new PlayerFallState(stateMachine,"Fall");
-        hangState = new PlayerHangState(stateMachine,"Idle");//应该改成悬挂动画
+        hangState = new PlayerHangState(stateMachine,"Hang");//应该改成悬挂动画
         climbState = new PlayerClimbState(stateMachine,"Idle");//应该改成攀爬动画
         cureState = new PlayerCureState(stateMachine,"Cure");
         rollState = new PlayerRollState(stateMachine,"Roll");
+        attackState = new PlayerAttackState(stateMachine,"Attack");
         stateMachine.Initialize(idleState);
     }
 

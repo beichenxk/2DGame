@@ -36,7 +36,7 @@ public class enemyBase : MonoBehaviour
 
     public virtual bool InRange()
     {
-        GameObject player = GameObject.Find("player");
+        GameObject player = GameObject.Find("Sprite");
         
         float x=player.transform.position.x;
         float distance=Math.Abs(x-transform.position.x);

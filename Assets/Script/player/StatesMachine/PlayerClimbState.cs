@@ -30,16 +30,21 @@ public class PlayerClimbState : State
             // Debug.Log("s");
             speed_y = -PlayerController.instance.ClimbSpeed;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if(Input.GetKeyDown(KeyCode.Space))
         {
-            // Debug.Log("s");
-            speed_x = -1;
+            if (Input.GetKey(KeyCode.A))
+        {
+            PlayerController.instance.rb.velocity=new Vector2(PlayerController.instance.Speed,0);
+            stateMachine.ChangeState(PlayerStateManager.instance.jumpState);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             // Debug.Log("s");
-            speed_x = 1;
+            PlayerController.instance.rb.velocity=new Vector2(-PlayerController.instance.Speed,0);
+            stateMachine.ChangeState(PlayerStateManager.instance.jumpState);
         }
+        }
+        
        
             
 

@@ -17,7 +17,11 @@ public class PlayerMoveState : State
 
     public override void Update()
     {
-        if (!detection.instance.isAtGround)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            stateMachine.ChangeState(PlayerStateManager.instance.attackState);
+        }
+        else if (!detection.instance.isAtGround)
         {
             stateMachine.ChangeState(PlayerStateManager.instance.fallState);
         }
