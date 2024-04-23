@@ -32,14 +32,17 @@ public class PlayerData:MonoBehaviour
     public int _Baseshot = 12;//枪械攻击力
     
     [Header("Property")]    //因为后面加上buff后未必是整数,我觉得应该改成一个float类型的数据,血量和蓝量数据也应该存在存档里
-    public float currentHP;
-    public float currentMP;
+    public int currentHP;
+    public int currentMP;
     public int red = 2;//红瓶数量
     public int blue = 1;//蓝瓶数量
     [Header("OtherStatics")]
     public int exp = 0;//经验值
     public int small = 0;//小阿卡纳
     public int large = 0;//大阿卡纳
+    [Header("HUD")]//用于控制血量和蓝量的显示
+    public SliderController HealthSlider;
+    public SliderController ManaSlider;
  
 
     public int maxHp
@@ -57,6 +60,17 @@ public class PlayerData:MonoBehaviour
     public int shot
     {
         get { return _Baseshot + _shotlevel; }
+    }
+
+    public void ChangeHealth(int num)
+    {
+        currentHP=Math.Clamp(currentHP+num,0,maxHp);
+        HealthSlider.Update(maxHp,currentHP);
+    }
+    public void ChangeMana(int num)
+    {
+        currentMP=Math.Clamp(currentMP+num,0,maxMp);
+        ManaSlider.Update(maxMp,currentMP);
     }
 
  

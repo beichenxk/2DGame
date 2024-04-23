@@ -11,8 +11,23 @@ public class PlayerCureState : State
     {
         Debug.Log("enter Cure");
         PlayerController.instance.ChangeAnimation(name);
-        PlayerData.instance.red--;
-        PlayerData.instance.currentHP=Math.Clamp(PlayerData.instance.currentHP+50,0,PlayerData.instance.maxHp);
+
+        if (DrinkChoose.instance.currentChoose == DrinkType.red)
+        {
+            if (PlayerData.instance.red >= 1)
+            {
+                PlayerData.instance.red--;
+                PlayerData.instance.ChangeHealth(50);
+            }
+        }
+        else
+        {
+            if (PlayerData.instance.blue >= 1)
+            {
+                PlayerData.instance.blue--;
+                PlayerData.instance.ChangeMana(50);
+            }
+        }
     }
     public override void Update()
     {
@@ -26,5 +41,5 @@ public class PlayerCureState : State
         Debug.Log("end Cure");
     }
 
-   
+
 }

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public  Rigidbody2D rb;
     public detection detection;
+    
 
     
 
@@ -40,7 +41,12 @@ public class PlayerController : MonoBehaviour
     {
         detection.checkAll();
         PlayerStateManager.instance.stateMachine.currentState.Update();//检测是否按键切换了状态
-        PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();      
+        PlayerStateManager.instance.stateMachine.currentState.FixedUpdate(); 
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            PlayerData.instance.ChangeHealth(-10);
+            PlayerData.instance.ChangeMana(-10);
+        }     
     }
     void FixedUpdate()
     {

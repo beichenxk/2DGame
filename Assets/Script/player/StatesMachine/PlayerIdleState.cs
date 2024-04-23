@@ -38,10 +38,7 @@ public class PlayerIdleState : State
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            if (PlayerData.instance.red > 0)
-            {
                 PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.cureState);
-            }
         }
 
 
