@@ -81,7 +81,7 @@ public class PlayerFallState : State
 
     public void EdgeCheck()
     {
-        Debug.Log("执行检测");
+        // Debug.Log("执行检测");
         detection.instance.isAtEdge = !Physics2D.Raycast(detection.instance.EdgeCheckPoint.transform.position,Vector2.down,detection.instance.distanceToEdge,detection.instance.WhatIsGround);
     }
 
