@@ -9,6 +9,8 @@ public class Utility : MonoBehaviour
     public bool InventoryIsOpen = false;
     public GameObject MinimapUI;
     public bool MinimapIsOpen = false;
+    [Header("Property")]
+    public bool canAttack=true;
 
     // Update is called once per frame
     void Update()
