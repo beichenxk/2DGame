@@ -18,7 +18,7 @@ public class bonfireManager : MonoBehaviour
     }
     void Start()
     {
-        spawnPoint = PlayerController.instance.transform.position;
+        spawnPoint = new Vector3((float)-1.9, (float)-1.38, (float)0.03);//第一个篝火的位置
         flowchart = FindObjectOfType<Flowchart>().GetComponent<Flowchart>();
     }
 

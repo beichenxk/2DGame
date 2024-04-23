@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAnimationManager:MonoBehaviour
 {   
     public GameObject AttackBox;
-     public void EnterIdleState()
+     public void ChangeRollState()
     {
         if(detection.instance.isAtWall)
         {
@@ -23,5 +23,9 @@ public class PlayerAnimationManager:MonoBehaviour
     {
         AttackBox.SetActive(false);
         PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.idleState);
+    }
+    public void DeadEnd()
+    {
+        LevelManager.instance.respawn();
     }
 }

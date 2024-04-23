@@ -15,6 +15,7 @@ public class PlayerStateManager:MonoBehaviour
     public PlayerCureState cureState;
     public PlayerRollState rollState;
     public PlayerAttackState attackState;
+    public PlayerDeadState deadState;
 
 
 
@@ -31,6 +32,7 @@ public class PlayerStateManager:MonoBehaviour
         cureState = new PlayerCureState(stateMachine,"Drink");
         rollState = new PlayerRollState(stateMachine,"Roll");
         attackState = new PlayerAttackState(stateMachine,"Attack");
+        deadState = new PlayerDeadState(stateMachine,"Dead");
         stateMachine.Initialize(idleState);
     }
 

@@ -20,7 +20,7 @@ public class PlayerIdleState : State
     }
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0)&&Utility.instance.canAttack)
         {
             stateMachine.ChangeState(PlayerStateManager.instance.attackState);
         }

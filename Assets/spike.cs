@@ -19,6 +19,7 @@ public class spike : MonoBehaviour
         {
             //减少玩家血量;
             PlayerController.instance.rb.transform.position=respawnPoint;
+            PlayerData.instance.ChangeHealth(-110);//需要删除
             // Debug.Log("命中陷阱");
         }
     }

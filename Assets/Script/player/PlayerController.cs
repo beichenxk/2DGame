@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.H))
         {
             PlayerData.instance.ChangeHealth(-10);
-            PlayerData.instance.ChangeMana(-10);
+            // PlayerData.instance.ChangeMana(-10);
         }     
     }
     void FixedUpdate()

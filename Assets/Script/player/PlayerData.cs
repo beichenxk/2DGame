@@ -62,15 +62,27 @@ public class PlayerData:MonoBehaviour
         get { return _Baseshot + _shotlevel; }
     }
 
+    
     public void ChangeHealth(int num)
     {
         currentHP=Math.Clamp(currentHP+num,0,maxHp);
-        HealthSlider.Update(maxHp,currentHP);
+        // HealthSlider.Update(maxHp,currentHP);
+        if(currentHP<=0)
+        {
+            // Debug.Log("执行死亡");
+            PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.deadState);
+        }
     }
     public void ChangeMana(int num)
     {
         currentMP=Math.Clamp(currentMP+num,0,maxMp);
         ManaSlider.Update(maxMp,currentMP);
+    }
+
+    public void Refresh()
+    {
+        currentHP=maxHp;
+        currentMP=maxMp;
     }
 
  

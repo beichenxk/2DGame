@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Utility : MonoBehaviour
 {
+    public static Utility instance;
     [Header("Inventory")]
     public GameObject InventoryUI;
     public bool InventoryIsOpen = false;
@@ -12,7 +13,10 @@ public class Utility : MonoBehaviour
     [Header("Property")]
     public bool canAttack=true;
 
-    // Update is called once per frame
+    void Awake()
+    {
+        instance=this;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -23,10 +27,12 @@ public class Utility : MonoBehaviour
             if (InventoryIsOpen == true)
             {
                 Time.timeScale = 0;
+                canAttack=false;
             }
             else
             {
                 Time.timeScale = 1;
+                canAttack=true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.M))

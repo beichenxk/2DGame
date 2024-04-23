@@ -13,8 +13,7 @@ public class bonfire : MonoBehaviour
     bool inCampFire;
     // public GameObject HintButton;
     Flowchart flowchart;
-    GameObject EngineerPrefab;
-    public GameObject EngineerSpawn;
+    
     void Start()
     {
         // HintButton.SetActive(false);
@@ -67,9 +66,6 @@ public class bonfire : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inCampFire = true;
-            Debug.Log("进入篝火");
-            EngineerPrefab = Instantiate(bonfireManager.instance.EngineerPrefab, EngineerSpawn.transform.position, quaternion.identity);
-            // HintButton.SetActive(true);
         }
     }
 
@@ -78,8 +74,6 @@ public class bonfire : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inCampFire = false;
-            Debug.Log("离开篝火");
-            Destroy(EngineerPrefab);
             if (flowchart.HasBlock(BlockName))
             {
                 flowchart.StopAllBlocks();

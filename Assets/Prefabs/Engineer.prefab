@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSpeak: 0
-  BlockName: "\u673A\u68B0\u5E08"
+  BlockName: "\u7EF4\u4FEE\u5E08"
   UpdateUI: {fileID: 1825845909185893176}
 --- !u!61 &1653414574417244369
 BoxCollider2D:
