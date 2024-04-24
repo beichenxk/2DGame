@@ -22,11 +22,16 @@ public class PlayerIdleState : State
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)&&Utility.instance.canAttack)
         {
+            // Debug.Log("进入攻击");
             stateMachine.ChangeState(PlayerStateManager.instance.attackState);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             stateMachine.ChangeState(PlayerStateManager.instance.jumpState);
+        }
+        else if(Input.GetKeyDown(KeyCode.Q))
+        {
+            stateMachine.ChangeState(PlayerStateManager.instance.prepareShootState);
         }
         else if (Input.GetKey(KeyCode.A))
         {

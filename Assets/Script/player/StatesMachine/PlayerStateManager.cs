@@ -16,6 +16,8 @@ public class PlayerStateManager:MonoBehaviour
     public PlayerRollState rollState;
     public PlayerAttackState attackState;
     public PlayerDeadState deadState;
+    public PlayerPrepareShootState prepareShootState;
+    public PlayerShootState shootState;
 
 
 
@@ -31,8 +33,10 @@ public class PlayerStateManager:MonoBehaviour
         climbState = new PlayerClimbState(stateMachine,"Idle");//应该改成攀爬动画
         cureState = new PlayerCureState(stateMachine,"Drink");
         rollState = new PlayerRollState(stateMachine,"Roll");
-        attackState = new PlayerAttackState(stateMachine,"Attack");
+        attackState = new PlayerAttackState(stateMachine,"");
         deadState = new PlayerDeadState(stateMachine,"Dead");
+        prepareShootState = new PlayerPrepareShootState(stateMachine,"");
+        shootState = new PlayerShootState(stateMachine,"");
         stateMachine.Initialize(idleState);
     }
 

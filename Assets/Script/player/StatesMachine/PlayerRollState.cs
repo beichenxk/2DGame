@@ -21,11 +21,11 @@ public class PlayerRollState : State
     {
         if (PlayerController.instance.transform.localScale.x == 1)
         {
-            PlayerController.instance.rb.velocity = new Vector2(-5, PlayerController.instance.rb.velocity.y);
+            PlayerController.instance.rb.velocity = new Vector2(-3, PlayerController.instance.rb.velocity.y);
         }
         else
         {
-        PlayerController.instance.rb.velocity = new Vector2(5, PlayerController.instance.rb.velocity.y);
+        PlayerController.instance.rb.velocity = new Vector2(3, PlayerController.instance.rb.velocity.y);
 
         }
     }

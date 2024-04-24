@@ -11,6 +11,7 @@ public class PlayerDeadState : State
     {
         Debug.Log("enter Dead");
         PlayerController.instance.ChangeAnimation(name);
+        PlayerController.instance.rb.velocity=Vector2.zero;
         
     }
     public override void Update()

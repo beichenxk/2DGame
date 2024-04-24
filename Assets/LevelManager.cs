@@ -20,7 +20,8 @@ public class LevelManager : MonoBehaviour
         PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.idleState);
         PlayerData.instance.Refresh();
         PlayerController.instance.transform.position=bonfireManager.instance.spawnPoint;
+        PlayerController.instance.ChangeAnimation("Resurrection");
         FindObjectOfType<Flowchart>().GetComponent<Flowchart>().SetBooleanVariable("DieBefore",true);       //用于判定对话选择
-
+        
     }
 }
