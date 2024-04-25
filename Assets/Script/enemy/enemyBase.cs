@@ -18,7 +18,8 @@ public class enemyBase : MonoBehaviour
     //public float nearRange = 1; //近战索敌距离
     public bool isStop=false; //敌人是否停止移动
     public bool isInCamera = false; //是否在摄像机视野中
-
+    public Transform leftRange;
+    public Transform rightRange;
 
     public virtual void checkInCamera()
     {
@@ -39,15 +40,15 @@ public class enemyBase : MonoBehaviour
         GameObject player = GameObject.Find("Sprite");
         
         float x=player.transform.position.x;
-        float distance=Math.Abs(x-transform.position.x);
-        //Debug.LogError("distance:"+distance);
         
         if (x > transform.position.x && moveRight)
         {
+            float distance = -transform.position.x + x;
             if (distance < Range)
                 return true;
         }else if (x < transform.position.x && !moveRight)
         {
+            float distance = transform.position.x - x;
             if (distance < Range)
                 return true;
         }
@@ -56,6 +57,7 @@ public class enemyBase : MonoBehaviour
 
     public virtual void moveOrAttack()
     {
+        var anim = GetComponent<Animator>();
         if (!isStop)
         {
             if (moveRight)
@@ -66,20 +68,27 @@ public class enemyBase : MonoBehaviour
             {
                 transform.Translate(Vector3.left * speed * Time.deltaTime);
             }
+            anim.SetBool("attack",false);
+            anim.SetBool("move",true);
+            
         }
         else
         {
             if (Time.time - lastAttackTime > attackCD)
             {
                 lastAttackTime = Time.time;
-                Debug.LogError("attack"+Time.time);
-                attack();
+                attack(anim);
             }
         }
     }
 
-    public virtual void attack()
+    
+    
+    
+    public virtual void attack(Animator anim)
     {
+        anim.SetBool("move",false);
+        anim.SetBool("attack",true);
         //播放攻击动画
     }
 
@@ -89,19 +98,39 @@ public class enemyBase : MonoBehaviour
             checkInCamera();
         if(!isInCamera)
             return;
-        bool inRange = InRange();
-        if (inRange)
-        {
-            isStop = true;
-        }
+        isStop = InRange();
+
         moveOrAttack();
     }
 
-    public virtual void die()      
+    public virtual void HpCheck()      
     {
-        
-        Destroy(gameObject);
+        if (hp <= 0)
+        {
+            var anim = GetComponent<Animator>();
+            anim.SetBool("dead",true);
+        }
     }
 
-    
+    public void BoundCheck()
+    {
+        
+        
+        if (transform.position.x - rightRange.position.x>=0)
+        {
+            moveRight = false;
+        }
+
+        if (transform.position.x - leftRange.position.x<=0)
+        {
+            moveRight = true;
+        }
+    }
+
+    public void dead()
+    {
+        gameObject.SetActive(false);
+    }
+
+
 }
