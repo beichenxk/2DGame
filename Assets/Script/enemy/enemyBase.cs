@@ -127,7 +127,7 @@ public class enemyBase : MonoBehaviour
         }
     }
 
-    public void dead()
+    public  virtual void dead()
     {
         gameObject.SetActive(false);
     }

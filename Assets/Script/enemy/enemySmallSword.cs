@@ -39,5 +39,9 @@ public class enemySmalldSword : enemyBase
             hp -= PlayerData.instance.atk;
         }
     }
-    
+
+    public override void dead()
+    {
+        base.dead();
+    }
 }
