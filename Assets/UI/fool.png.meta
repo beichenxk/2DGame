@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/UI/fool.png.meta
 guid: 3e26511e46d044be4a8201d6b4276a80
+========
+guid: cdf04f2ee1618af408616322ffe760a2
+>>>>>>>> master:Assets/resources/enemy/剧场双子/待机/剧场双子-卡罗尔-待机.gif.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,7 +98,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

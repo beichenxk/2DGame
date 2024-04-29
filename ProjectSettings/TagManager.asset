@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - bound
-  - Undefined
   - Enemy
+  - enemyAttack
+  - moveright
+  - moveleft
+  - attack
   layers:
   - Default
   - TransparentFX

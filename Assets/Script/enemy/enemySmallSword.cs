@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class enemySmalldSword : enemyBase
@@ -20,18 +22,26 @@ public class enemySmalldSword : enemyBase
     void Update()
     {
         action();
-        spriteRenderer.flipX=moveRight;
+        
+        if (moveRight)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else
+            transform.localScale = new Vector3(1, 1, 1);
+        BoundCheck();
+        HpCheck();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
-        
-        if (collision.gameObject.CompareTag("bound"))
+        if (other.gameObject.tag == "attack")
         {
-            moveRight=!moveRight;
+            Debug.LogError("碰到攻击物体");
+            hp -= PlayerData.instance.atk;
         }
+    }
 
-        Debug.LogError("moveRight:" + moveRight);
+    public override void dead()
+    {
+        base.dead();
     }
 }

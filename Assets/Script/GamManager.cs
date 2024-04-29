@@ -8,6 +8,7 @@ public class GamManager : Singleton<GamManager>
     public GameObject player;
     public bool isRunning;
     public string saveName;
+    public PlayerStateManager playerStateManager;
     //存档加载
     public void LoadGame(string save)
     {
@@ -24,6 +25,8 @@ public class GamManager : Singleton<GamManager>
         {
             saveName = "save1";
         }
+        playerStateManager=player.GetComponentInChildren<PlayerStateManager>();
+        //playerStateManager.Init();
     }
 
     

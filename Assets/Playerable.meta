@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Playerable.meta
 guid: 0395971839020475eb8da575b9565180
+========
+guid: bf608246d469ea24b84a792c0724d853
+>>>>>>>> master:Assets/resources/enemy/剧场双子.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

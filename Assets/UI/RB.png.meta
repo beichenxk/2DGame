@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/UI/RB.png.meta
 guid: 9bc268ff2f14c41cbb1394ebe21cb69b
+========
+guid: 64e1abcb36f7e834e952ac87708496ee
+>>>>>>>> master:Assets/resources/enemy/剧场双子/待机/剧场双子-卡罗尔-待机0002.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,7 +98,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
