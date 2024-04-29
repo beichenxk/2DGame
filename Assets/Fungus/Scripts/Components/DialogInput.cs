@@ -86,7 +86,7 @@ namespace Fungus
 
             if (writer != null)
             {
-                if (Input.GetButtonDown(currentStandaloneInputModule.submitButton) ||
+                if (Input.GetKeyDown(KeyCode.Return) ||
                     (cancelEnabled && Input.GetButton(currentStandaloneInputModule.cancelButton)))
                 {
                     SetNextLineFlag();
@@ -98,18 +98,21 @@ namespace Fungus
             case ClickMode.Disabled:
                 break;
             case ClickMode.ClickAnywhere:
-                if (Input.GetMouseButtonDown(0))
+                if (
+                    // Input.GetMouseButtonDown(0)
+                    Input.GetKeyDown(KeyCode.Return)
+                )
                 {
                     SetClickAnywhereClickedFlag();
                 }
                 break;
-            case ClickMode.ClickOnDialog:
-                if (dialogClickedFlag)
-                {
-                    SetNextLineFlag();
-                    dialogClickedFlag = false;
-                }
-                break;
+            // case ClickMode.ClickOnDialog:
+            //     if (dialogClickedFlag)
+            //     {
+            //         SetNextLineFlag();
+            //         dialogClickedFlag = false;
+            //     }
+            //     break;
             }
 
             if (ignoreClickTimer > 0f)
@@ -168,7 +171,7 @@ namespace Fungus
             // Only applies if ClickedAnywhere is selected
             if (clickMode == ClickMode.ClickAnywhere)
             {
-                SetNextLineFlag();
+                // SetNextLineFlag();
             }
         }
         /// <summary>

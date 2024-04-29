@@ -43,11 +43,12 @@ public class PlayerData:MonoBehaviour
     [Header("HUD")]//用于控制血量和蓝量的显示
     public SliderController HealthSlider;
     public SliderController ManaSlider;
+    public float Hpmodifier;
  
 
     public int maxHp
     {
-        get { return _Basehp + 10 * _hplevel; }
+        get { return (int)((_Basehp + 10 * _hplevel)*(1+Hpmodifier)); }
     }
     public int maxMp
     {

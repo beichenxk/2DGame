@@ -12,43 +12,54 @@ public class PlayerController : MonoBehaviour
     [Header("Property")]
     public static PlayerController instance;
     public Animator animator;
-    public  Rigidbody2D rb;
+    public Rigidbody2D rb;
     public detection detection;
+    public bool canMove;
 
-    
-    
 
-    
+
+
+
 
     [Header("Move")]
     public float Speed;
-    [HideInInspector]public bool moveRight;//用于判断是否向右,避免一直判定翻转函数FlipSprite
+    [HideInInspector] public bool moveRight;//用于判断是否向右,避免一直判定翻转函数FlipSprite
 
     public float JumpForce;
     public float ClimbSpeed;
+
     void Awake()
     {
-        instance=this;
-        onFlipSprite+=flipSprite;
+        instance = this;
+        onFlipSprite += flipSprite;
+        canMove = true;
     }
     void OnValidate()
     {
-        animator=GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         detection = GetComponentInChildren<detection>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         detection.checkAll();
-        PlayerStateManager.instance.stateMachine.currentState.Update();//检测是否按键切换了状态
-        PlayerStateManager.instance.stateMachine.currentState.FixedUpdate(); 
-        if(Input.GetKeyDown(KeyCode.H))
+        if (canMove == true)
         {
-            PlayerData.instance.ChangeHealth(-10);
+            PlayerStateManager.instance.stateMachine.currentState.Update();
+            PlayerStateManager.instance.stateMachine.currentState.FixedUpdate();
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            // PlayerData.instance.ChangeHealth(-10);
             // PlayerData.instance.ChangeMana(-10);
-        }     
+        }
+        
+    
+
     }
     void FixedUpdate()
     {
@@ -60,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeAnimation(string animationName)
     {
-        animator.CrossFade(animationName,0);
+        animator.CrossFade(animationName, 0);
     }
 
     public void flipSprite()

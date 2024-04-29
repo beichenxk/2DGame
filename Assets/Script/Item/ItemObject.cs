@@ -16,10 +16,10 @@ public class ItemObject : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-            Debug.Log(data.name+" is picked up!");
-            Inventory.instance.AddItem(data);
-            Destroy(gameObject);
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //         Debug.Log(data.name+" is picked up!");
+    //         Inventory.instance.AddItem(data);
+    //         Destroy(gameObject);
+    // }
 }

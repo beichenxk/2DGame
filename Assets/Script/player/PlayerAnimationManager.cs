@@ -36,12 +36,12 @@ public class PlayerAnimationManager:MonoBehaviour
         AttackBox.SetActive(false);
         if(!combo)
         {
-            Debug.Log("进入空闲");
+            // Debug.Log("进入空闲");
             PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.idleState);
         }
         else if(combo)
         {
-            Debug.Log("进入连击");
+            // Debug.Log("进入连击");
             PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.attackState);
         }
         

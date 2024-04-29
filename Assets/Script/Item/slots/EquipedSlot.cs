@@ -8,7 +8,7 @@ public class EquipedSlot:ItemSlot
          if(item.data.itemType==ItemType.equipment)
         {
             Debug.Log("脱下"+item.data.itemName);
-            Inventory.instance.Unequip(item.data);
+            // Inventory.instance.Unequip(item.data);
         }
     }
 }

@@ -16,6 +16,7 @@ public class PlayerIdleState : State
     {
         Debug.Log("enter idle");
         PlayerController.instance.ChangeAnimation(name);
+        PlayerController.instance.rb.velocity=new Vector2(0,PlayerController.instance.rb.velocity.y);
         
     }
     public override void Update()

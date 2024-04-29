@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 6619824961536315693}
   - component: {fileID: 7830838099201893844}
   - component: {fileID: 6182561001496008276}
-  - component: {fileID: 7003537451441762627}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -211,22 +210,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7003537451441762627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119569895244917672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdaa437a3e824a90a22e18d64291ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item:
-    data: {fileID: 0}
-    stackSize: 0
-  itemText: {fileID: 1988233922231716949}
 --- !u!1 &157911056377452329
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +362,7 @@ MonoBehaviour:
   InventoryIsOpen: 0
   MinimapUI: {fileID: 5519311965022622671}
   MinimapIsOpen: 0
+  canAttack: 1
 --- !u!1 &1203276750381067090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,6 +1557,7 @@ MonoBehaviour:
   animator: {fileID: 452328784935196868}
   rb: {fileID: 1944234339888485704}
   detection: {fileID: 7364166376823995526}
+  canMove: 0
   Speed: 3.5
   moveRight: 0
   JumpForce: 5.2
@@ -1604,6 +1589,8 @@ MonoBehaviour:
   exp: 0
   small: 0
   large: 0
+  HealthSlider: {fileID: 0}
+  ManaSlider: {fileID: 0}
 --- !u!114 &4390156421345425364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,6 +1604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackBox: {fileID: 6689181521704241345}
+  combo: 0
 --- !u!61 &4845888397883771396
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3347,7 +3335,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8321728984246781445}
-  - component: {fileID: 8431410918559604300}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -3371,20 +3358,6 @@ Transform:
   - {fileID: 217314153922611712}
   m_Father: {fileID: 1284881270921276692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8431410918559604300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7463777127544524843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26cd44a5290ba49b28ee9c8480b735fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Equiped: []
-  Equipment: []
 --- !u!1 &7493441815767581306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3482,7 +3455,6 @@ MonoBehaviour:
   - {fileID: 8351912130132353748}
   EquipmentParent: {fileID: 3363205080415654496}
   Equipmentslots:
-  - {fileID: 7003537451441762627}
   - {fileID: 3197052268527079495}
   - {fileID: 2017844199889237120}
   - {fileID: 3050764052644922775}
