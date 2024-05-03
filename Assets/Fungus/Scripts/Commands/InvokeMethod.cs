@@ -79,11 +79,14 @@ namespace Fungus
         {
             if (componentType == null)
             {
+                Debug.LogError(targetComponentAssemblyName);
                 componentType = ReflectionHelper.GetType(targetComponentAssemblyName);
             }
 
             if (objComponent == null)
             {
+                Debug.LogError(gameObject.name);
+                Debug.LogError(componentType.GetType().ToString());
                 objComponent = targetObject.GetComponent(componentType);
             }
 
