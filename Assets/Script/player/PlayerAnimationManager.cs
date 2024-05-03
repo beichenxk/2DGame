@@ -99,5 +99,12 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         AudioManager.instance.playPlayerSound((int)playerSoundtype.Resurrection);
     }
+    public void ShootEnd()
+    {
+        if(!PlayerController.instance.charge)
+        {
+            EnterIdleState();
+        }
+    }
  
 }

@@ -96,7 +96,8 @@ public class EquipmentCards : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         if (Moveback)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, StartPoint, MoveSpeed * Time.deltaTime * 100f);
+            // Debug.Log("is moving");
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, StartPoint, MoveSpeed);
             if (transform.localPosition == StartPoint)
             {
                 Moveback = false;

@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [Header("shoot")]
     public Transform firepoint;
     public GameObject bulletPrefab;
+    public bool charge;
 
 
 
@@ -60,8 +61,8 @@ public class PlayerController : MonoBehaviour
             // PlayerData.instance.ChangeHealth(-10);
             // PlayerData.instance.ChangeMana(-10);
         }
-        
-    
+
+
 
     }
     void FixedUpdate()
@@ -90,9 +91,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void shoot()
+    public void shoot(bool charge=false)
     {
-        var bullet = Instantiate(bulletPrefab,firepoint.position,firepoint.rotation);
-        bullet.transform.localScale = transform.localScale;
+        var bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+        if (charge)
+        {
+            bullet.transform.localScale = 2 * transform.localScale;
+        }
+        else
+        {
+            bullet.transform.localScale = transform.localScale;
+        }
+        AudioManager.instance.playPlayerSound((int)playerSoundtype.shoot);
     }
 }

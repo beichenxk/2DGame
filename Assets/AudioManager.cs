@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum playerSoundtype{attack1,attack2,move,jump,roll,hang,cure,hurt,dead,invincible,Resurrection,shoot,chargeShoot} 
+enum playerSoundtype{attack1,attack2,move,jump,roll,hang,cure,hurt,dead,invincible,Resurrection,shoot,charge} 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;

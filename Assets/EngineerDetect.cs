@@ -7,15 +7,27 @@ public class EngineerDetect : MonoBehaviour
 {
     private GameObject EngineerPrefab;
     public GameObject EngineerSpawn;
+    bool hastrigger=false;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-
-        if (other.CompareTag("Player"))
+        if (!hastrigger)
         {
-            EngineerPrefab = Instantiate(bonfireManager.instance.EngineerPrefab, EngineerSpawn.transform.position, quaternion.identity);
+            
+            if (GetComponentInParent<bonfire>().isActive)
+            {
+                if (other.CompareTag("Player"))
+                {
+                    EngineerPrefab = Instantiate(bonfireManager.instance.EngineerPrefab, EngineerSpawn.transform.position, quaternion.identity);
+                }
+                 hastrigger=true;
+            }
+           
         }
+
+
     }
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -23,6 +35,7 @@ public class EngineerDetect : MonoBehaviour
         {
             Destroy(EngineerPrefab);
         }
+        hastrigger=false;
     }
 
 }

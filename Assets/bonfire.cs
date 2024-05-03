@@ -11,6 +11,7 @@ public class bonfire : MonoBehaviour
     public string Name;
     public string BlockName;
     bool inCampFire;
+    public bool isActive; 
     // public GameObject HintButton;
     Flowchart flowchart;
     
@@ -31,11 +32,14 @@ public class bonfire : MonoBehaviour
 
                 if (!bonfireManager.instance.unlockedbonfires.Find(obj => obj.Name == this.Name))
                 {
-                    Debug.Log("已点燃篝火" + this.Name);
+                    // Debug.Log("已点燃篝火" + this.Name);
+                    isActive=true;
                     bonfireManager.instance.UnlockBonfire(this);
                     bonfireManager.instance.spawnPoint = transform.position;
                     setFungusBoolVariable(this.Name);
-                    GetComponent<SpriteRenderer>().color = Color.red;
+                    GetComponent<SpriteRenderer>().color = Color.white;
+                    GetComponent<Animator>().CrossFade("Bonfire_burning",0);
+
                     PlayerData.instance.red=2;
                     PlayerData.instance.blue=1;
                 }

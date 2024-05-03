@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 public class PlayerPrepareShootState : State
 {
-    public float keydownTime;//记录按键时间
+    
 
     public PlayerPrepareShootState(StateMachine stateMachine, string aniBoolName) : base(stateMachine, aniBoolName)
     {
@@ -11,7 +11,7 @@ public class PlayerPrepareShootState : State
 
     public override void Enter()
     {
-        Debug.Log("enter prepare");
+        // Debug.Log("enter prepare");
         PlayerController.instance.ChangeAnimation("Idle_fight");
         
     }
@@ -23,22 +23,9 @@ public class PlayerPrepareShootState : State
         }
         else if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            // stateMachine.ChangeState(PlayerStateManager.instance.shootState);
-            keydownTime=Time.time;
+            stateMachine.ChangeState(PlayerStateManager.instance.shootState);
         }
-        else if(Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            if(Time.time-keydownTime<=0.3)
-            {
-                PlayerAnimationManager.instance.chargeShoot=false;
-            }
-            // else
-            // {
-            //     PlayerAnimationManager.instance.chargeShoot=true;
-            // }
-                stateMachine.ChangeState(PlayerStateManager.instance.shootState);
-
-        }
+ 
         else if (Input.GetKey(KeyCode.A))
         {
             stateMachine.ChangeState(PlayerStateManager.instance.moveState);
@@ -54,7 +41,7 @@ public class PlayerPrepareShootState : State
     }
     public override void Exit()
     {
-        Debug.Log("end prepare");
+        // Debug.Log("end prepare");
     }
     
 

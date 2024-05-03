@@ -13,13 +13,19 @@ public class Engineer : MonoBehaviour
     public GameObject UpdateUI;
 
     public Flowchart flowchart;
+    private Animator theAni;
 
 
 
     void OnValidate()
     {
         instance = this;
+        
+    }
+    void Start()
+    {
         flowchart = FindObjectOfType<Flowchart>().GetComponent<Flowchart>();
+        theAni = GetComponent<Animator>();
     }
     void Update()
     {
@@ -31,30 +37,36 @@ public class Engineer : MonoBehaviour
                 if (flowchart.HasBlock(BlockName))
                 {
                     flowchart.ExecuteBlock(BlockName);
-
+                    theAni.CrossFade("Chat",0);
                 }
             }
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("玩家进入");
+        // Debug.Log("玩家进入");
         canSpeak = true;
         Utility.instance.canAttack = false;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("玩家退出");
+        // Debug.Log("玩家退出");
         canSpeak = false;
         if(flowchart.GetExecutingBlocks().Count!=0)
         {
             flowchart.StopAllBlocks();
+           
         }
+
+         StopChat();
             
         
         Utility.instance.canAttack = true;
     }
-
+    public void StopChat()
+    {
+        theAni.CrossFade("Idle",0);
+    }
     public void openUpdateUI()
     {
         UpdateUI.SetActive(true);
