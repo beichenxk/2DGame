@@ -12,9 +12,10 @@ public class PlayerJumpState : State
     }
     public override void Enter()
     {
-        Debug.Log("enter Jump");
+        // Debug.Log("enter Jump");
         PlayerController.instance.ChangeAnimation(name);
         PlayerController.instance.rb.velocity = new Vector2(PlayerController.instance.rb.velocity.x, PlayerController.instance.JumpForce);
+        AudioManager.instance.playPlayerSound((int)playerSoundtype.jump);
     }
     public override void Update()
     {
@@ -55,6 +56,6 @@ public class PlayerJumpState : State
     }
     public override void Exit()
     {
-        Debug.Log("end Jump");
+        // Debug.Log("end Jump");
     }
 }

@@ -9,8 +9,9 @@ public class PlayerRollState : State
 
     public override void Enter()
     {
-        Debug.Log("enter Roll");
+        // Debug.Log("enter Roll");
         PlayerController.instance.ChangeAnimation(name);
+        AudioManager.instance.playPlayerSound((int)playerSoundtype.roll);
 
     }
     public override void Update()
@@ -31,7 +32,7 @@ public class PlayerRollState : State
     }
     public override void Exit()
     {
-        Debug.Log("end Roll");
+        // Debug.Log("end Roll");
         PlayerController.instance.rb.velocity = new Vector2(0, PlayerController.instance.rb.velocity.y);
     }
 

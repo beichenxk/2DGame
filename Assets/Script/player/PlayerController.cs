@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public detection detection;
     public bool canMove;
+    [Header("shoot")]
+    public Transform firepoint;
+    public GameObject bulletPrefab;
 
 
 
@@ -85,5 +88,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    public void shoot()
+    {
+        var bullet = Instantiate(bulletPrefab,firepoint.position,firepoint.rotation);
+        bullet.transform.localScale = transform.localScale;
     }
 }

@@ -44,6 +44,8 @@ public class PlayerData:MonoBehaviour
     public SliderController HealthSlider;
     public SliderController ManaSlider;
     public float Hpmodifier;
+    [Header("properties")]
+    public bool isInvincible;
  
 
     public int maxHp

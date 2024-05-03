@@ -9,8 +9,21 @@ public class PlayerShootState : State
 
     public override void Enter()
     {
-        Debug.Log("enter shoot");
-        PlayerController.instance.ChangeAnimation("Shoot");
+        // Debug.Log("enter shoot");
+        if(!PlayerAnimationManager.instance.chargeShoot)
+        {
+            AudioManager.instance.playPlayerSound((int)playerSoundtype.shoot);
+            PlayerController.instance.ChangeAnimation("Shoot");
+            PlayerController.instance.shoot();
+        }
+        else
+        {
+            AudioManager.instance.playPlayerSound((int)playerSoundtype.chargeShoot);
+            PlayerController.instance.ChangeAnimation("Shoot");
+        }
+
+        
+        
     }
     public override void Update()
     {
@@ -21,7 +34,7 @@ public class PlayerShootState : State
     }
     public override void Exit()
     {
-        Debug.Log("end shoot");
+        // Debug.Log("end shoot");
     }
 
 

@@ -15,6 +15,7 @@ public class PlayerClimbState : State
         PlayerController.instance.ChangeAnimation(name);
         PlayerController.instance.rb.gravityScale = 0;
         PlayerController.instance.rb.velocity = Vector2.zero;
+        AudioManager.instance.playPlayerSound((int)playerSoundtype.hang);
     }
     public override void Update()
     {   

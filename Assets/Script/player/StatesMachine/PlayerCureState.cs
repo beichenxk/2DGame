@@ -11,7 +11,7 @@ public class PlayerCureState : State
     {
         Debug.Log("enter Cure");
         PlayerController.instance.ChangeAnimation(name);
-
+        AudioManager.instance.playPlayerSound((int)playerSoundtype.cure);
         if (DrinkChoose.instance.currentChoose == DrinkType.red)
         {
             if (PlayerData.instance.red >= 1)
@@ -28,6 +28,7 @@ public class PlayerCureState : State
                 PlayerData.instance.ChangeMana(50);
             }
         }
+        
     }
     public override void Update()
     {

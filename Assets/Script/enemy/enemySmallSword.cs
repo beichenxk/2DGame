@@ -31,17 +31,11 @@ public class enemySmalldSword : enemyBase
         HpCheck();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "attack")
-        {
-            Debug.LogError("碰到攻击物体");
-            hp -= PlayerData.instance.atk;
-        }
-    }
+    //将小兵的ontriggerenter写入基类中
 
     public override void dead()
     {
         base.dead();
     }
+    
 }

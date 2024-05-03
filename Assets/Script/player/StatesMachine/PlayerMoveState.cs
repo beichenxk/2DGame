@@ -11,8 +11,9 @@ public class PlayerMoveState : State
 
     public override void Enter()
     {
-        Debug.Log("enter move");
+        // Debug.Log("enter move");
         PlayerController.instance.ChangeAnimation(name);
+        AudioManager.instance.playPlayerSound((int)playerSoundtype.move);
     }
 
     public override void Update()
@@ -71,6 +72,7 @@ public class PlayerMoveState : State
     }
     public override void Exit()
     {
-        Debug.Log("end move");
+        // Debug.Log("end move");
+        AudioManager.instance.stopPlayerSound((int)playerSoundtype.move);
     }
 }

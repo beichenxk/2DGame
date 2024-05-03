@@ -7,7 +7,7 @@ using UnityEngine;
 public class enemyBase : MonoBehaviour
 {
     public string enemyName = "enemy";
-    public int exp = 1; 
+    public int exp = 1;
     public float speed = 1;//敌人移动速度
     public bool moveRight = true; //敌人是否向右移动
     public float lastAttackTime = float.MinValue;
@@ -16,10 +16,13 @@ public class enemyBase : MonoBehaviour
     public float damage = 10;
     public float Range = 0; //索敌距离
     //public float nearRange = 1; //近战索敌距离
-    public bool isStop=false; //敌人是否停止移动
+    public bool isStop = false; //敌人是否停止移动
     public bool isInCamera = false; //是否在摄像机视野中
     public Transform leftRange;
     public Transform rightRange;
+
+    public float knockbackForce;//判断击退的力度
+    public float stunTime;//碰到怪物击退后晕眩时间
 
     public virtual void checkInCamera()
     {
@@ -38,21 +41,22 @@ public class enemyBase : MonoBehaviour
     public virtual bool InRange()
     {
         GameObject player = GameObject.Find("Sprite");
-        
-        float x=player.transform.position.x;
-        
+
+        float x = player.transform.position.x;
+
         if (x > transform.position.x && moveRight)
         {
             float distance = -transform.position.x + x;
             if (distance < Range)
                 return true;
-        }else if (x < transform.position.x && !moveRight)
+        }
+        else if (x < transform.position.x && !moveRight)
         {
             float distance = transform.position.x - x;
             if (distance < Range)
                 return true;
         }
-            return false;
+        return false;
     }
 
     public virtual void moveOrAttack()
@@ -68,9 +72,9 @@ public class enemyBase : MonoBehaviour
             {
                 transform.Translate(Vector3.left * speed * Time.deltaTime);
             }
-            anim.SetBool("attack",false);
-            anim.SetBool("move",true);
-            
+            anim.SetBool("attack", false);
+            anim.SetBool("move", true);
+
         }
         else
         {
@@ -82,55 +86,81 @@ public class enemyBase : MonoBehaviour
         }
     }
 
-    
-    
-    
+
+
+
     public virtual void attack(Animator anim)
     {
-        anim.SetBool("move",false);
-        anim.SetBool("attack",true);
+        anim.SetBool("move", false);
+        anim.SetBool("attack", true);
         //播放攻击动画
     }
 
     public virtual void action()
     {
-        if(!isInCamera)
+        if (!isInCamera)
             checkInCamera();
-        if(!isInCamera)
+        if (!isInCamera)
             return;
         isStop = InRange();
 
         moveOrAttack();
     }
 
-    public virtual void HpCheck()      
+    public virtual void HpCheck()
     {
         if (hp <= 0)
         {
             var anim = GetComponent<Animator>();
-            anim.SetBool("dead",true);
+            anim.SetBool("dead", true);
         }
     }
 
     public void BoundCheck()
     {
-        
-        
-        if (transform.position.x - rightRange.position.x>=0)
+
+
+        if (transform.position.x - rightRange.position.x >= 0)
         {
             moveRight = false;
         }
 
-        if (transform.position.x - leftRange.position.x<=0)
+        if (transform.position.x - leftRange.position.x <= 0)
         {
             moveRight = true;
         }
     }
 
-    public  virtual void dead()
+    public virtual void dead()
     {
         gameObject.SetActive(false);
     }
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        // Debug.Log("进入碰撞");
+        if (other.CompareTag("Player")&&!PlayerData.instance.isInvincible)
+        {
+            StartCoroutine(StunCo());// 碰到怪物后晕眩一段时间,玩家无法操作
+        }
+        if (other.gameObject.tag == "attack")
+        {
+            Debug.LogError("碰到攻击物体");
+            hp -= PlayerData.instance.atk;
+        }
+    }
+
+    IEnumerator StunCo()
+    {
+        // AudioManager.instance.playPlayerSound((int)playerSoundtype.invincible);
+        PlayerController.instance.canMove = false;
+        PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.idleState);
+        PlayerController.instance.rb.velocity = new Vector2(PlayerController.instance.transform.localScale.x * knockbackForce, PlayerController.instance.rb.velocity.y);
+        yield return new WaitForSeconds(stunTime);
+        PlayerController.instance.rb.velocity = new Vector2(0, PlayerController.instance.rb.velocity.y);
+        PlayerController.instance.canMove = true;
+    }
+
 
 
 }

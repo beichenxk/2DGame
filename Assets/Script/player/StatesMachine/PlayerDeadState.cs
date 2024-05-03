@@ -9,10 +9,10 @@ public class PlayerDeadState : State
 
     public override void Enter()
     {
-        Debug.Log("enter Dead");
+        // Debug.Log("enter Dead");
         PlayerController.instance.ChangeAnimation(name);
         PlayerController.instance.rb.velocity=Vector2.zero;
-        
+        AudioManager.instance.playPlayerSound((int)playerSoundtype.dead);
     }
     public override void Update()
     {
@@ -23,7 +23,7 @@ public class PlayerDeadState : State
     }
     public override void Exit()
     {
-        Debug.Log("end Dead");
+        // Debug.Log("end Dead");
     }
 
 
