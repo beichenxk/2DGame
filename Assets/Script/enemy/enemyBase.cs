@@ -41,8 +41,22 @@ public class enemyBase : MonoBehaviour
     public virtual bool InRange()
     {
         GameObject player = GameObject.Find("Sprite");
+        Vector2 origin = new Vector2(transform.position.x, transform.position.y);
+        Vector2 direction = new Vector2(1, 0);
+        if (!moveRight)
+            direction = new Vector2(-1, 0);
 
-        float x = player.transform.position.x;
+        int layerMask = LayerMask.GetMask("player");
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, Range,layerMask);
+        if (hit.collider != null)
+        {
+            Debug.LogError("hit :"+hit.collider.gameObject.name);
+            if (hit.collider.gameObject.CompareTag("Player"))
+                return true;
+            return false;
+        }
+
+        /*float x = player.transform.position.x;
 
         if (x > transform.position.x && moveRight)
         {
@@ -56,6 +70,7 @@ public class enemyBase : MonoBehaviour
             if (distance < Range)
                 return true;
         }
+        return false;*/
         return false;
     }
 
@@ -147,6 +162,7 @@ public class enemyBase : MonoBehaviour
         {
             Debug.LogError("碰到攻击物体");
             hp -= PlayerData.instance.atk;
+            StartCoroutine(BeAttack());
         }
     }
 
@@ -159,6 +175,17 @@ public class enemyBase : MonoBehaviour
         yield return new WaitForSeconds(stunTime);
         PlayerController.instance.rb.velocity = new Vector2(0, PlayerController.instance.rb.velocity.y);
         PlayerController.instance.canMove = true;
+    }
+
+    IEnumerator BeAttack()
+    {
+        var material = GetComponent<SpriteRenderer>().material;
+        for (int i = 0; i <= 10d; i++)
+        {
+            material.color=Color.red;
+            yield return null;
+        }
+        material.color = Color.white;
     }
 
 
