@@ -24,6 +24,12 @@ public class Directory : MonoBehaviour
         PlayerController.instance.canMove = false;
         PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.idleState);
     }
+    public void PlayMerchantandSmith()
+    {
+        flowchart.ExecuteBlock("遇到商人铁匠");
+        PlayerController.instance.canMove = false;
+        PlayerStateManager.instance.stateMachine.ChangeState(PlayerStateManager.instance.idleState);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

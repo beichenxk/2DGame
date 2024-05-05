@@ -9,7 +9,7 @@ public class MerchantSlot : ItemSlot
         if (item != null)
         {
             Debug.Log("购买了" + item.data.itemName);
-            merchant.instance.RemoveItem(item.data);
+            // merchant.instance.RemoveItem(item.data);
             // Inventory.instance.AddItem(item.data);
         }
 
