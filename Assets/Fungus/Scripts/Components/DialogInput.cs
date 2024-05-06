@@ -86,7 +86,7 @@ namespace Fungus
 
             if (writer != null)
             {
-                if (Input.GetKeyDown(KeyCode.Space) ||
+                if (Input.GetKeyDown(KeyCode.Return) ||
                     (cancelEnabled && Input.GetButton(currentStandaloneInputModule.cancelButton)))
                 {
                     SetNextLineFlag();

@@ -21,6 +21,10 @@ public class PlayerIdleState : State
     }
     public override void Update()
     {
+        if (!detection.instance.isAtGround)
+        {
+            stateMachine.ChangeState(PlayerStateManager.instance.fallState);
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0)&&Utility.instance.canAttack)
         {
             // Debug.Log("进入攻击");
