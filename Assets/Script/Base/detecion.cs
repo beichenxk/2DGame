@@ -11,6 +11,7 @@ public class detection : MonoBehaviour
     public bool isAtGround;
 
 
+
     public GameObject WallCheckPoint;
     public float distanceToWall;
     public bool isAtWall;

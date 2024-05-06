@@ -10,6 +10,8 @@ public class DrinkChoose : MonoBehaviour
     public static DrinkChoose instance;
     Image item;
     public DrinkType currentChoose;
+
+    public Sprite Red,Blue;
     void Awake()
     {
         instance=this;
@@ -22,12 +24,14 @@ public class DrinkChoose : MonoBehaviour
         {
             if(currentChoose==DrinkType.red)
             {
-                item.color=Color.blue;
+                // item.color=Color.blue;
+                item.sprite=Blue;
                 currentChoose=DrinkType.blue;
             }
             else
             {
-                item.color=Color.red;
+                // item.color=Color.red;
+                item.sprite=Red;
                 currentChoose=DrinkType.red;
             }
         }

@@ -10,6 +10,8 @@ public class Utility : MonoBehaviour
     public bool InventoryIsOpen = false;
     public GameObject MinimapUI;
     public bool MinimapIsOpen = false;
+    public GameObject StateUI;
+    public bool StateIsOpen = false;
     [Header("Property")]
     public bool canAttack=true;
 
@@ -39,6 +41,21 @@ public class Utility : MonoBehaviour
         {
             MinimapUI.SetActive(!MinimapIsOpen);
             MinimapIsOpen = !MinimapIsOpen;
+        }
+        else if(Input.GetKeyDown(KeyCode.O))
+        {
+            StateUI.SetActive(!StateIsOpen);
+            StateIsOpen=!StateIsOpen;
+            if (StateIsOpen == true)
+            {
+                Time.timeScale = 0;
+                canAttack=false;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                canAttack=true;
+            }
         }
     }
 }

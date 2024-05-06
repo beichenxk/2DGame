@@ -11,10 +11,10 @@ public class bonfire : MonoBehaviour
     public string Name;
     public string BlockName;
     bool inCampFire;
-    public bool isActive; 
+    public bool isActive;
     // public GameObject HintButton;
     Flowchart flowchart;
-    
+
     void Start()
     {
         // HintButton.SetActive(false);
@@ -27,21 +27,21 @@ public class bonfire : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                PlayerData.instance.red=2;
-                PlayerData.instance.blue=1;
+                PlayerData.instance.red = 2;
+                PlayerData.instance.blue = 1;
 
                 if (!bonfireManager.instance.unlockedbonfires.Find(obj => obj.Name == this.Name))
                 {
                     // Debug.Log("已点燃篝火" + this.Name);
-                    isActive=true;
+                    isActive = true;
                     bonfireManager.instance.UnlockBonfire(this);
                     bonfireManager.instance.spawnPoint = transform.position;
                     setFungusBoolVariable(this.Name);
                     GetComponent<SpriteRenderer>().color = Color.white;
-                    GetComponent<Animator>().CrossFade("Bonfire_burning",0);
+                    GetComponent<Animator>().CrossFade("Bonfire_burning", 0);
 
-                    PlayerData.instance.red=2;
-                    PlayerData.instance.blue=1;
+                    PlayerData.instance.red = 2;
+                    PlayerData.instance.blue = 1;
                 }
                 else
                 {
@@ -51,6 +51,8 @@ public class bonfire : MonoBehaviour
                     {
                         flowchart.ExecuteBlock(BlockName);
                     }
+                    PlayerData.instance.Refresh();
+
                 }
 
                 // foreach (bonfire camp in bonfireManager.instance.unlockedcampfires)
@@ -91,6 +93,10 @@ public class bonfire : MonoBehaviour
             flowchart.SetBooleanVariable("trans1", true);
         else if (name == "2")
             flowchart.SetBooleanVariable("trans2", true);
+        else if (name == "3")
+            flowchart.SetBooleanVariable("trans3", true);
+        else if (name == "4")
+            flowchart.SetBooleanVariable("trans4", true);
     }
 
 }

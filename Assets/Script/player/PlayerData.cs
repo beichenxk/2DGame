@@ -69,7 +69,7 @@ public class PlayerData:MonoBehaviour
     public void ChangeHealth(int num)
     {
         currentHP=Math.Clamp(currentHP+num,0,maxHp);
-        // HealthSlider.UpdateSlider(maxHp,currentHP);
+        HealthSlider.UpdateSlider(maxHp,currentHP);
         if(currentHP<=0)
         {
             // Debug.Log("执行死亡");
@@ -79,7 +79,7 @@ public class PlayerData:MonoBehaviour
     public void ChangeMana(int num)
     {
         currentMP=Math.Clamp(currentMP+num,0,maxMp);
-        // ManaSlider.UpdateSlider(maxMp,currentMP);
+        ManaSlider.UpdateSlider(maxMp,currentMP);
     }
 
     public void Refresh()

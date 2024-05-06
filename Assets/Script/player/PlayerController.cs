@@ -91,16 +91,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void shoot(bool charge=false)
+    public void shoot(bool ischarge=false)
     {
         var bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        if (charge)
+        if (ischarge)
         {
             bullet.transform.localScale = 2 * transform.localScale;
+            bullet.GetComponent<bullet>().Damage=3*PlayerData.instance.shot;
+            PlayerData.instance.ChangeMana(-20);
         }
         else
         {
             bullet.transform.localScale = transform.localScale;
+            bullet.GetComponent<bullet>().Damage=PlayerData.instance.shot;
+            PlayerData.instance.ChangeMana(-10);
         }
         AudioManager.instance.playPlayerSound((int)playerSoundtype.shoot);
     }

@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fungus;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 
 public class enemyBoss : MonoBehaviour
 {
-    
+
     public float knockbackForce;//判断击退的力度
     public float stunTime;//碰到怪物击退后晕眩时间
     [Serializable]
@@ -19,17 +20,17 @@ public class enemyBoss : MonoBehaviour
         [Header("技能伤害")]
         public int hurt = 10;
 
-        [Header("技能索敌距离")] 
+        [Header("技能索敌距离")]
         public float range = 1.5f;
-        
+
         //上一次攻击时间
         public float lastAttackTime = 0;
 
         public string skillName;
     }
-    
-    
-    
+
+
+
     [Header("一阶段动作")]
     public AnimatorController Animator1;
     [Header("二阶段动作")]
@@ -45,9 +46,9 @@ public class enemyBoss : MonoBehaviour
     public float speed = 2;
 
     public List<Skill> Skills = new List<Skill>();
-    
+
     //一阶段
-    
+
     [Header("平A")]
     public Skill attack;
     [Header("冲击波")]
@@ -55,19 +56,19 @@ public class enemyBoss : MonoBehaviour
     [Header("砸地")]
     public Skill crash;
 
-    
+
     //二阶段
     [Header("二阶段_平A")]
     public Skill attack2;
     [Header("二阶段_冲击波")]
     public Skill shockWave2;
-    
-    [Header("二阶段_砸地1")] 
+
+    [Header("二阶段_砸地1")]
     public Skill crash1;
-    [Header("二阶段_砸地2")] 
+    [Header("二阶段_砸地2")]
     public Skill crash2;
-    
-    
+
+
     public Animator animator;
 
     public bool isUseSKill = false;
@@ -83,8 +84,8 @@ public class enemyBoss : MonoBehaviour
     }
 
     public Skill currentSKill = null;
-    public Queue<Skill> canUseSkill = new Queue<Skill>(); 
-    
+    public Queue<Skill> canUseSkill = new Queue<Skill>();
+
     public bool isinit = false;
     // Update is called once per frame
     void Update()
@@ -105,45 +106,49 @@ public class enemyBoss : MonoBehaviour
             if (checkInRange())
             {
                 bool isWalk = animator.GetBool("walk");
-                if(isWalk)
+                if (isWalk)
                 {
                     bool isInSkill = animator.GetBool(currentSKill.skillName);
                     if (!isInSkill)
                     {
                         //释放技能
-                        animator.SetBool("walk",false);
-                        animator.SetBool(currentSKill.skillName,true);
-                        if(currentSKill.skillName=="shockwave")
+                        animator.SetBool("walk", false);
+                        animator.SetBool(currentSKill.skillName, true);
+                        if (currentSKill.skillName == "shockwave")
                             Debug.Log("wave");
                         currentSKill.lastAttackTime = Time.time;
-                        
+
                     }
                 }
             }
             else
             {
-                GameObject player = GameObject.Find("Sprite");
-                if (player.transform.position.x > transform.position.x)
+                if (!isDead)
                 {
-                    transform.Translate(Vector3.right * speed * Time.deltaTime);
-                    transform.localScale = new Vector3(-1, 1, 1);
+                    GameObject player = GameObject.Find("Sprite");
+                    if (player.transform.position.x > transform.position.x)
+                    {
+                        transform.Translate(Vector3.right * speed * Time.deltaTime);
+                        transform.localScale = new Vector3(-1, 1, 1);
+                    }
+                    else
+                    {
+                        transform.Translate(Vector3.left * speed * Time.deltaTime);
+                        transform.localScale = new Vector3(1, 1, 1);
+                    }
+                    animator.SetBool("walk", false);
+                    animator.SetBool("move", true);
                 }
-                else
-                {
-                    transform.Translate(Vector3.left * speed * Time.deltaTime);
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
-                animator.SetBool("walk",false);
-                animator.SetBool("move",true);
+
             }
         }
 
-        
+
         var animstate = animator.GetCurrentAnimatorStateInfo(0);
-        if (animstate.normalizedTime > 1f&&!animstate.IsName("Idle"))
+        if (animstate.normalizedTime > 1f && !animstate.IsName("Idle"))
         {
             setWalk();
-            isUseSKill=false;
+            isUseSKill = false;
         }
         checkHp();
 
@@ -161,12 +166,12 @@ public class enemyBoss : MonoBehaviour
 
     void checkInCD()
     {
-        for (int i = 0; i < Skills.Count;i++)
+        for (int i = 0; i < Skills.Count; i++)
         {
             var sk = Skills[i];
             if ((Time.time - sk.lastAttackTime) > sk.cd)
             {
-                if(!canUseSkill.Contains(sk))
+                if (!canUseSkill.Contains(sk))
                     canUseSkill.Enqueue(sk);
             }
         }
@@ -176,16 +181,16 @@ public class enemyBoss : MonoBehaviour
 
     void checkHp()
     {
-        if (hp <= 200&&!isInSecond)
+        if (hp <= 200 && !isInSecond)
         {
             isInSecond = true;
-            animator.SetBool("trans",true);
+            animator.SetBool("trans", true);
         }
 
         if (hp <= 0)
         {
             isDead = true;
-            animator.SetBool("dead",true);
+            animator.SetBool("dead", true);
         }
     }
 
@@ -205,27 +210,30 @@ public class enemyBoss : MonoBehaviour
 
     public virtual void dead()
     {
-        gameObject.SetActive(false);
-    }
-    
-    void setWalk()
-    {
-       
-        animator.SetBool("trans",false);
-        animator.SetBool("move",false);
-        animator.SetBool("attack",false);
-        animator.SetBool("crash",false);
-        animator.SetBool("crash1",false);
-        animator.SetBool("crash2",false);
-        animator.SetBool("shockwave",false);
-        animator.SetBool("walk",true);
+        // gameObject.SetActive(false);
+        FindObjectOfType<Flowchart>().GetComponent<Flowchart>().ExecuteBlock("击败机械裁决官");
+        animator.enabled = false;
+        LevelManager.instance.DefeatBoss();
     }
 
-    
+    void setWalk()
+    {
+
+        animator.SetBool("trans", false);
+        animator.SetBool("move", false);
+        animator.SetBool("attack", false);
+        animator.SetBool("crash", false);
+        animator.SetBool("crash1", false);
+        animator.SetBool("crash2", false);
+        animator.SetBool("shockwave", false);
+        animator.SetBool("walk", true);
+    }
+
+
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
         // Debug.Log("进入碰撞");
-        if (other.CompareTag("Player")&&!PlayerData.instance.isInvincible)
+        if (other.CompareTag("Player") && !PlayerData.instance.isInvincible)
         {
             StartCoroutine(StunCo());// 碰到怪物后晕眩一段时间,玩家无法操作
         }
@@ -252,7 +260,7 @@ public class enemyBoss : MonoBehaviour
         var material = GetComponent<SpriteRenderer>().material;
         for (int i = 0; i <= 10d; i++)
         {
-            material.color=Color.red;
+            material.color = Color.red;
             yield return null;
         }
         material.color = Color.white;

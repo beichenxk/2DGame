@@ -2786,7 +2786,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -812643897
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eda8bb37587e84aaf94ac70d4ef669e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2817,6 +2817,7 @@ MonoBehaviour:
   canMove: 0
   firepoint: {fileID: 8140162811324074889}
   bulletPrefab: {fileID: 2129825054925966816, guid: a2fa65b39a6bb4a9cb8e8af35eaaddad, type: 3}
+  charge: 0
   Speed: 3.5
   moveRight: 0
   JumpForce: 5.2

@@ -11,6 +11,8 @@ TagManager:
   - attack
   - bound
   - bullet
+  - EnemyBoss
+  - CamaraBound
   layers:
   - Default
   - TransparentFX

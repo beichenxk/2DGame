@@ -14,6 +14,10 @@ public class PlayerShootState : State
         // Debug.Log("enter shoot");
         PlayerController.instance.ChangeAnimation("Shoot");
         keydownTime=Time.time;
+        if(PlayerData.instance.currentMP<=10)
+        {
+            stateMachine.ChangeState(PlayerStateManager.instance.idleState);
+        }
     }
     public override void Update()
     {

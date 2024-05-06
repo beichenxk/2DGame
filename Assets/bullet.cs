@@ -8,6 +8,7 @@ public class bullet : MonoBehaviour
 
     public float FlySpeed;
     public bool hit;
+    public float Damage;
     void Start()
     {
 
@@ -26,9 +27,20 @@ public class bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            // Debug.Log(攻击到敌人);
+            // Debug.Log("攻击到敌人");
             hit=true;
             GetComponent<Animator>().CrossFade("hit",0);
+            other.GetComponent<enemyBase>().hp-=Damage;
+        }
+        if (other.CompareTag("EnemyBoss"))
+        {
+            hit=true;
+            GetComponent<Animator>().CrossFade("hit",0);
+            other.GetComponent<enemyBoss>().hp-=(int)Damage;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
