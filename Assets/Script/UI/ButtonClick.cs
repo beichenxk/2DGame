@@ -33,7 +33,7 @@ public class ButtonClick : MonoBehaviour
 
     void BeginNewGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Map2");
         
         GamManager.Instance.LoadGame(String.Empty);
     }
