@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353a792faebd14e4c90bbbf32c0d07aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atk: 0
+  atk: 5
 --- !u!1 &873763848879484922
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +304,9 @@ MonoBehaviour:
   rightRange: {fileID: 8937738595338940442}
   knockbackForce: 3
   stunTime: 0.3
+  _zidan: {fileID: 0}
+  zidanTime: 10
+  zidanSpeed: 1
   spriteRenderer: {fileID: 0}
 --- !u!50 &706108299152480337
 Rigidbody2D:

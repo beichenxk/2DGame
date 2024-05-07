@@ -189,5 +189,39 @@ public class enemyBase : MonoBehaviour
     }
 
 
+    public GameObject _zidan;
+
+    public int zidanTime = 10;
+
+    public float zidanSpeed = 1;
+    //远程攻击
+    public void farAttack()
+    {
+        if (_zidan != null)
+        {
+            StartCoroutine(zidanMove());
+        }
+    }
+
+    IEnumerator zidanMove()
+    {
+        
+        GameObject zidan = Instantiate(_zidan);
+        zidan.transform.position = transform.position;
+        for (int i = 0; i < zidanTime; i++)
+        {
+            if (moveRight)
+            {
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.left * speed * Time.deltaTime);
+            }
+
+            yield return null;
+        }
+    }
+
 
 }
